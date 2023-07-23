@@ -25,12 +25,32 @@ namespace Editor.Tools.Ripgrep
         bool focusTextField;
 
         [MenuItem("Tools/Editors/Open Ripgrep Search Window %g")]
-        static public void ShowWindow()
+        static public RipgrepSearchWindow ShowWindow()
         {
             var window = GetWindow<RipgrepSearchWindow>();
             window.titleContent = new GUIContent("Ripgrep Search");
             window.minSize = new Vector2(750, 350);
             window.ShowUtility();
+
+            return window;
+        }
+
+        [MenuItem("Assets/Search for this asset's GUID %&g")]
+        public static void SearchAssetGuid()
+        {
+            UnityEngine.Object selectedObject = Selection.activeObject;
+            string assetPath = AssetDatabase.GetAssetPath(selectedObject);
+            string guid = AssetDatabase.AssetPathToGUID(assetPath);
+
+            var window = ShowWindow();
+            window.EnsureTreeView();
+
+            if (selectedObject == null || string.IsNullOrEmpty(guid)) {
+                window.ShowNotification(new GUIContent("No asset selected"));
+            } else {
+                window.searchStr = guid;
+                window.StartSearch();
+            }
         }
 
         void OnEnable() => EditorApplication.delayCall += () => focusTextField = true;
