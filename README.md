@@ -13,7 +13,7 @@ Helper class for making your own search tools along with a built-in transient Ri
 
 
 ### Requirements
-- install [https://github.com/BurntSushi/ripgrep](ripgrep) (make sure it's on your path for Windows and available from `/usr/local/bin/rg` for macOS)
+- install [ripgrep](https://github.com/BurntSushi/ripgrep) (make sure it's on your path for Windows and available from `/usr/local/bin/rg` for macOS)
 - Unity LTS release (not tested on anything that isn't an LTS because I'm not insane enough to use one)
 
 
